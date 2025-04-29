@@ -1,0 +1,127 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"organizeImports": {
+	  "enabled": true
+	},
+	"files": {
+	  "ignore": [
+		"node_modules",
+		"dist",
+		".DS_Store",
+		"*.log",
+		"coverage",
+		".env",
+		".env.*",
+		"*.lock",
+		".git"
+	  ],
+	  "ignoreUnknown": true
+	},
+	"formatter": {
+	  "enabled": true,
+	  "useEditorconfig": false,
+	  "formatWithErrors": false,
+	  "indentStyle": "space",
+	  "indentWidth": 2,
+	  "lineEnding": "lf",
+	  "lineWidth": 100,
+	  "attributePosition": "auto",
+	  "bracketSpacing": true
+	},
+	"javascript": {
+	  "formatter": {
+		"jsxQuoteStyle": "double",
+		"quoteProperties": "asNeeded",
+		"trailingCommas": "all",
+		"semicolons": "always",
+		"arrowParentheses": "always",
+		"bracketSameLine": false,
+		"quoteStyle": "single",
+		"attributePosition": "auto",
+		"bracketSpacing": true
+	  },
+	  "parser": {
+		
+	  }
+	},
+	"linter": {
+	  "enabled": true,
+	  "rules": {
+		"recommended": true,
+		"style": {
+		  "useBlockStatements": "error",
+		  "useConst": "error",
+		  "useNamingConvention": "error",
+		  "useImportType": "off"
+		},
+		"complexity": {
+		  "noExcessiveCognitiveComplexity": {
+			"level": "warn",
+			"options": {
+			  "maxAllowedComplexity": 15
+			}
+		  },
+		  "noBannedTypes": "error",
+		  "noUselessTypeConstraint": "error"
+		},
+		"correctness": {
+		  "noPrecisionLoss": "error",
+		  "noUnusedVariables": "error",
+		  "noConstantCondition": "error"
+		},
+		"suspicious": {
+		  "noExplicitAny": "warn",
+		  "noExtraNonNullAssertion": "error",
+		  "noMisleadingInstantiator": "error",
+		  "noUnsafeDeclarationMerging": "error",
+		  "noConsole": "warn",
+		  "noDebugger": "error"
+		},
+		"security": {
+		  "noGlobalEval": "error"
+		},
+		"performance": {
+		  "noDelete": "warn"
+		}
+	  },
+	  "ignore": [
+		
+	  ]
+	},
+	"overrides": [
+	  {
+		"include": [
+		  "*.spec.ts",
+		  "*.test.ts",
+		  "scripts/**/*.ts",
+		  "src/main.ts"
+		],
+		"linter": {
+		  "rules": {
+			"suspicious": {
+			  "noConsole": "off"
+			},
+			"complexity": {
+			  "noExcessiveCognitiveComplexity": "off"
+			}
+		  }
+		}
+	  },
+	  {
+		"include": [
+		  "*.config.js",
+		  "*.config.ts"
+		],
+		"linter": {
+		  "rules": {
+			"style": {
+			  "useNamingConvention": "off"
+			},
+			"suspicious": {
+			  "noExplicitAny": "off"
+			}
+		  }
+		}
+	  }
+	]
+  }
