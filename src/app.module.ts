@@ -12,6 +12,9 @@ import { AllExceptionsFilter } from "./exception-filters/all-exception.filter";
 import { HttpExceptionsFilter } from "./exception-filters/http-exception.filter";
 import { UnauthorizedExceptionsFilter } from "./exception-filters/unauthorized-exception.filter";
 
+import { WorkspaceModule } from "./modules/workspace/workspace.module";
+import { DbModule } from "./modules/db/db.module";
+
 @Module({
   imports: [
     // Configure environment variables
@@ -19,9 +22,11 @@ import { UnauthorizedExceptionsFilter } from "./exception-filters/unauthorized-e
       isGlobal: true, // Make the configuration global
       load: [configuration], // Load the environment variables from the configuration file
     }),
-
     // Configure logging
-    LoggerModule.forRoot(getLoggerConfig()), // ! forRootAsync is not working with ConfigService in nestjs-pino
+    LoggerModule.forRoot(getLoggerConfig()),
+
+    DbModule,
+    WorkspaceModule,
   ],
   controllers: [AppController],
   providers: [
