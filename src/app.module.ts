@@ -1,10 +1,16 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { LoggerModule } from "nestjs-pino";
+import { APP_FILTER } from "@nestjs/core";
+
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { ConfigModule } from "@nestjs/config";
-import { configuration } from "./config";
-import { LoggerModule } from "nestjs-pino";
 import { getLoggerConfig } from "./app.config";
+import { configuration } from "./config";
+
+import { AllExceptionsFilter } from "./exception-filters/all-exception.filter";
+import { HttpExceptionsFilter } from "./exception-filters/http-exception.filter";
+import { UnauthorizedExceptionsFilter } from "./exception-filters/unauthorized-exception.filter";
 
 @Module({
   imports: [
@@ -18,6 +24,11 @@ import { getLoggerConfig } from "./app.config";
     LoggerModule.forRoot(getLoggerConfig()), // ! forRootAsync is not working with ConfigService in nestjs-pino
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    { provide: APP_FILTER, useClass: AllExceptionsFilter },
+    { provide: APP_FILTER, useClass: HttpExceptionsFilter },
+    { provide: APP_FILTER, useClass: UnauthorizedExceptionsFilter },
+    AppService,
+  ],
 })
 export class AppModule {}
