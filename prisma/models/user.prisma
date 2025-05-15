@@ -6,7 +6,7 @@ model User {
     verificationCode       String?
     verificationCodeExpiry DateTime?
     registerCode           String?
-    createdAt              DateTime  @default(now())
-    updatedAt              DateTime  @updatedAt
+    createdAt              DateTime? @default(now())
+    updatedAt              DateTime? @updatedAt
     Access                 Access[]
 }

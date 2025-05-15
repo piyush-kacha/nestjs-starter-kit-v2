@@ -5,6 +5,6 @@ model Access {
     user        User      @relation(fields: [userId], references: [id])
     workspaceId String    @db.ObjectId
     workspace   Workspace @relation(fields: [workspaceId], references: [id])
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
+    createdAt   DateTime? @default(now())
+    updatedAt   DateTime? @updatedAt
 }

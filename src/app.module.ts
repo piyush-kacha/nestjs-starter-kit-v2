@@ -13,7 +13,7 @@ import { HttpExceptionsFilter } from "./exception-filters/http-exception.filter"
 import { UnauthorizedExceptionsFilter } from "./exception-filters/unauthorized-exception.filter";
 
 import { WorkspaceModule } from "./modules/workspace/workspace.module";
-import { DbModule } from "./modules/db/db.module";
+import { DbModule } from "./db/db.module";
 
 @Module({
   imports: [
