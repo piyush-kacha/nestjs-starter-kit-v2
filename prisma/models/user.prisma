@@ -1,12 +1,11 @@
 model User {
-    id                     String    @id @default(auto()) @map("_id") @db.ObjectId
-    email                  String    @unique
-    password               String?
-    verified               Boolean   @default(false)
-    verificationCode       String?
-    verificationCodeExpiry DateTime?
-    registerCode           String?
-    createdAt              DateTime? @default(now())
-    updatedAt              DateTime? @updatedAt
-    Access                 Access[]
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  username     String @unique
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ownedWorkspaces Workspace[] @relation("Owner")
+  accessGrants    Access[]
 }

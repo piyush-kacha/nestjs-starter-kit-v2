@@ -4,7 +4,9 @@ model Access {
     userId      String    @db.ObjectId
     user        User      @relation(fields: [userId], references: [id])
     workspaceId String    @db.ObjectId
-    workspace   Workspace @relation(fields: [workspaceId], references: [id])
+    workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade) // Added onDelete: Cascade
     createdAt   DateTime? @default(now())
     updatedAt   DateTime? @updatedAt
+
+    @@unique([userId, workspaceId]) // Ensures a user has only one role per workspace
 }
