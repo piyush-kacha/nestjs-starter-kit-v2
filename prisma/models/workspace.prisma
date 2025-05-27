@@ -1,7 +1,15 @@
 model Workspace {
-    id        String    @id @default(auto()) @map("_id") @db.ObjectId
-    name      String
-    createdAt DateTime? @default(now())
-    updatedAt DateTime? @updatedAt
-    Access    Access[]
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?   // Added optional description
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+
+  ownerId String   @db.ObjectId // Relation to User model
+  owner   User     @relation("Owner", fields: [ownerId], references: [id])
+
+  accessGrants Access[] // Relation to Access model
+
+  @@index([ownerId]) // Index on ownerId
 }
+

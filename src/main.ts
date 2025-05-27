@@ -51,6 +51,18 @@ async function bootstrap() {
   // Get the port number from the configuration
   const port = configService.get<number>("port");
 
+  // Setup global pipes
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true, // Enable transformation
+      whitelist: true, // Strip properties not defined in DTO
+      forbidNonWhitelisted: true, // Throw error if non-whitelisted properties are present
+      transformOptions: {
+        enableImplicitConversion: true, // Allow conversion of primitive types
+      },
+    }),
+  );
+
   // Start the application
   await app.listen(port);
 
